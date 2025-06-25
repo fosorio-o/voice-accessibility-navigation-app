@@ -43,8 +43,27 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 main {
   padding: 1rem;
   min-height: 60vh;
+}
+
+/* Global comment styles */
+.comment-form button:hover {
+  background: #0056b3;
+}
+
+.comment-form button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.related-img {
+  transition: transform 0.2s ease;
+}
+
+.related-img:hover {
+  transform: scale(1.02);
 }
 </style>

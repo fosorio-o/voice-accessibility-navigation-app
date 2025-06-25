@@ -1,11 +1,17 @@
 <template>
   <header>
-    <h1>The Daily Vue News</h1>
+    <h1 tabindex="0" @keydown.enter="focusNav">The Daily Vue News</h1>
     <nav role="navigation" aria-label="Main navigation">
-      <router-link to="/" @click="announce('Navigating to Home')">Home</router-link>
-      <router-link to="/article1" @click="announce('Navigating to Article 1')">Article 1</router-link>
-      <router-link to="/article2" @click="announce('Navigating to Article 2')">Article 2</router-link>
-      <router-link to="/article3" @click="announce('Navigating to Article 3')">Article 3</router-link>
+      <router-link
+        v-for="(link, index) in navLinks"
+        :key="index"
+        :to="link.path"
+        :ref="el => { if (el) navItems[index] = el }"
+        @click="announce(link.announcement)"
+        @keydown.tab.exact="handleNavTab($event, index)"
+      >
+        {{ link.label }}
+      </router-link>
     </nav>
   </header>
 </template>
@@ -13,7 +19,28 @@
 <script>
 export default {
   name: 'AppHeader',
+  data() {
+    return {
+      navItems: [],
+      navLinks: [
+        { label: 'Home', path: '/', announcement: 'Navigating to Home' },
+        { label: 'Article 1', path: '/article1', announcement: 'Navigating to Article 1' },
+        { label: 'Article 2', path: '/article2', announcement: 'Navigating to Article 2' },
+        { label: 'Article 3', path: '/article3', announcement: 'Navigating to Article 3' }
+      ]
+    }
+  },
   methods: {
+    focusNav() {
+      this.navItems[0].focus()
+    },
+    handleNavTab(e, index) {
+      if (index === this.navLinks.length - 1 && !e.shiftKey) {
+        e.preventDefault()
+        document.querySelector('main').setAttribute('tabindex', '-1')
+        document.querySelector('main').focus()
+      }
+    },
     announce(message) {
       this.$emit('announce', message)
     }
@@ -42,5 +69,13 @@ nav a {
 }
 nav a:hover {
   text-decoration: underline;
+}
+nav a:focus {
+  outline: 3px solid #007BFF;
+  outline-offset: 2px;
+}
+h1:focus {
+  outline: 3px solid #007BFF;
+  outline-offset: 5px;
 }
 </style>

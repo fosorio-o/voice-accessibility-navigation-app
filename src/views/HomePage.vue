@@ -1,15 +1,23 @@
 <template>
   <div class="home">
-    <h2>Latest News</h2>
+    <h2 tabindex="0">Latest News</h2>
     <div class="articles">
-      <div class="article-preview" v-for="article in articles" :key="article.id">
+      <article
+        v-for="(article, index) in articles"
+        :key="article.id"
+        :ref="el => { if (el) articleRefs[index] = el }"
+        tabindex="0"
+        @keydown.enter="navigateToArticle(article.link)"
+        @keydown.tab.exact="handleArticleTab($event, index)"
+        class="article-preview"
+      >
         <img :src="article.image" :alt="article.alt" class="article-img" />
         <h3>{{ article.title }}</h3>
         <p>{{ article.summary }}</p>
         <router-link :to="article.link" class="read-more" @click="announce(`Navigating to ${article.title}`)">
           Read More
         </router-link>
-      </div>
+      </article>
     </div>
   </div>
 </template>
@@ -44,12 +52,26 @@ export default {
           alt: 'Sports stadium during a game',
           link: '/article3'
         }
-      ]
+      ],
+      articleRefs: []
     }
   },
   methods: {
     announce(message) {
       this.$emit('announce', message)
+    },
+    handleArticleTab(e, index) {
+      if (index === this.articles.length - 1 && !e.shiftKey) {
+        e.preventDefault()
+        this.$refs.commentsSection?.focus()
+      }
+    },
+    navigateToArticle(path) {
+      this.$router.push(path)
+      // Note: 'this.article.title' was incorrect in the original suggestion as 'article' is not directly accessible here.
+      // It should ideally reference the specific article, but since it's a navigation method, we'll adjust the message.
+      // For simplicity, we'll emit a generic message or modify as needed.
+      this.announce(`Navigating to article`)
     }
   }
 }
@@ -92,5 +114,9 @@ h3 {
 }
 .read-more:hover {
   text-decoration: underline;
+}
+article:focus {
+  box-shadow: 0 0 0 3px #007BFF;
+  outline: none;
 }
 </style>
