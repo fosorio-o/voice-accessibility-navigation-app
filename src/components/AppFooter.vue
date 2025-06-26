@@ -4,7 +4,7 @@
     @keydown.tab.exact="handleFooterTab"
     @keydown.shift.tab.exact="focusLastRelatedArticle"
   >
-    <p>&copy; 2023 The Daily Vue News</p>
+    <p>&copy; 2023 Notícias Diárias Vue. Todos os direitos reservados.</p>
   </footer>
 </template>
 
@@ -31,5 +31,9 @@ footer {
   padding: 1rem;
   text-align: center;
   margin-top: 2rem;
+}
+footer:focus {
+  outline: 3px solid #007BFF;
+  outline-offset: 2px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <header>
-    <h1 tabindex="0" @keydown.enter="focusNav">The Daily Vue News</h1>
-    <nav role="navigation" aria-label="Main navigation">
+    <h1 tabindex="0" @keydown.enter="focusNav">Notícias Diárias Vue</h1>
+    <nav role="navigation" aria-label="Navegação principal">
       <router-link
         v-for="(link, index) in navLinks"
         :key="index"
@@ -23,10 +23,10 @@ export default {
     return {
       navItems: [],
       navLinks: [
-        { label: 'Home', path: '/', announcement: 'Navigating to Home' },
-        { label: 'Article 1', path: '/article1', announcement: 'Navigating to Article 1' },
-        { label: 'Article 2', path: '/article2', announcement: 'Navigating to Article 2' },
-        { label: 'Article 3', path: '/article3', announcement: 'Navigating to Article 3' }
+        { label: 'Início', path: '/', announcement: 'Navegando para Início' },
+        { label: 'Artigo 1', path: '/article1', announcement: 'Navegando para Artigo 1' },
+        { label: 'Artigo 2', path: '/article2', announcement: 'Navegando para Artigo 2' },
+        { label: 'Artigo 3', path: '/article3', announcement: 'Navegando para Artigo 3' }
       ]
     }
   },

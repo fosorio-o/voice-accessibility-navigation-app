@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2 tabindex="0">Latest News</h2>
+    <h2 tabindex="0">Últimas Notícias</h2>
     <div class="articles">
       <article
         v-for="(article, index) in articles"
@@ -14,8 +14,8 @@
         <img :src="article.image" :alt="article.alt" class="article-img" />
         <h3>{{ article.title }}</h3>
         <p>{{ article.summary }}</p>
-        <router-link :to="article.link" class="read-more" @click="announce(`Navigating to ${article.title}`)">
-          Read More
+        <router-link :to="article.link" class="read-more" @click="announce(`Navegando para ${article.title}`)">
+          Ler Mais
         </router-link>
       </article>
     </div>
@@ -27,51 +27,47 @@ export default {
   name: 'HomePage',
   data() {
     return {
+      articleRefs: [],
       articles: [
         {
           id: 1,
-          title: 'Breaking News: Tech Innovation',
-          summary: 'New advancements in AI are changing the landscape of technology.',
-          image: 'https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&cs=tinysrgb&w=800',
-          alt: 'Technology concept image with circuits',
+          title: 'Notícia Urgente: Inovação Tecnológica',
+          summary: 'Novos avanços em IA estão mudando o panorama da tecnologia.',
+          image: 'https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&cs=tinysrgb&w=800',          alt: 'Imagem de conceito de tecnologia com circuitos',
           link: '/article1'
         },
         {
           id: 2,
-          title: 'Global Climate Summit Results',
-          summary: 'World leaders agree on new environmental policies for the next decade.',
+          title: 'Resultados da Cúpula Global do Clima',
+          summary: 'Líderes mundiais concordam com novas políticas ambientais para a próxima década.',
           image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60',
-          alt: 'Green forest representing environmental focus',
+          alt: 'Floresta verde representando foco ambiental',
           link: '/article2'
         },
         {
           id: 3,
-          title: 'Sports Update: Championship Finals',
-          summary: 'An unexpected turn of events in the finals shocks fans worldwide.',
+          title: 'Atualização Esportiva: Finais do Campeonato',
+          summary: 'Um turno inesperado de eventos nas finais choca fãs em todo o mundo.',
           image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60',
-          alt: 'Sports stadium during a game',
+          alt: 'Estádio esportivo durante um jogo',
           link: '/article3'
         }
-      ],
-      articleRefs: []
+      ]
     }
   },
   methods: {
-    announce(message) {
-      this.$emit('announce', message)
-    },
     handleArticleTab(e, index) {
       if (index === this.articles.length - 1 && !e.shiftKey) {
         e.preventDefault()
-        this.$refs.commentsSection?.focus()
+        // Aqui você pode adicionar um foco para a próxima seção, se houver
       }
     },
     navigateToArticle(path) {
       this.$router.push(path)
-      // Note: 'this.article.title' was incorrect in the original suggestion as 'article' is not directly accessible here.
-      // It should ideally reference the specific article, but since it's a navigation method, we'll adjust the message.
-      // For simplicity, we'll emit a generic message or modify as needed.
-      this.announce(`Navigating to article`)
+      this.announce(`Navegando para artigo`)
+    },
+    announce(message) {
+      this.$emit('announce', message)
     }
   }
 }

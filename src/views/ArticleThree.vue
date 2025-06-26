@@ -1,12 +1,12 @@
 <template>
   <div class="article">
-    <h2>Sports Update: Championship Finals</h2>
+    <h2>Atualização Esportiva: Finais do Campeonato</h2>
     <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" alt="Sports stadium during a game" class="article-img" />
     <div class="content">
-      <p>Published: October 8, 2023</p>
-      <p>An unexpected turn of events in the finals shocks fans worldwide. The underdog team clinched victory in the last seconds of the game, marking one of the greatest upsets in sports history.</p>
-      <p>Analysts are praising the team's strategy and resilience. Fans are already looking forward to next season's rematch.</p>
-      <router-link to="/" class="back-link" @click="announce('Navigating back to Home')">Back to Home</router-link>
+      <p>Publicado: 8 de outubro de 2023</p>
+      <p>Uma reviravolta inesperada na final chocou os fãs do mundo todo. O time azarão conquistou a vitória nos últimos segundos do jogo, marcando uma das maiores surpresas da história do esporte.</p>
+      <p>Analistas elogiam a estratégia e a resiliência da equipe. Os fãs já estão ansiosos pela revanche da próxima temporada.
+</p>      <router-link to="/" class="back-link" @click="announce('Navigating back to Home')">Back to Home</router-link>
     </div>
   </div>
 </template>
